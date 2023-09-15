@@ -12,14 +12,11 @@ In this case, all that was needed was:
 1. Get a Personal Access token for [Gitlab API](https://docs.gitlab.com/ee/api/rest/index.html)
 1. Setup free trial [Jira Cloud](https://www.atlassian.com/try/cloud/signup?bundle=jira-software&edition=free&signupSource=skipBundles)
 1. Setup token in Jira Cloud for [basic auth API access](https://developer.atlassian.com/cloud/jira/platform/basic-auth-for-rest-apis/) and [reference API](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issues/#api-group-issues)
-1. In the Node.js project, set the env variables based:
-  - JIRA_API_TOKEN
-  - JIRA_API_ENDPOINT
-  - GITLAB_ACCESS_TOKEN
-  - GITLAB_API_ENDPOINT
+1. In the Node.js project, set the env variables using the `.env.example`
 1. Run the provided project locally `npm install && npm start`
 
 ## Testing
+1. 
 
 ### Automatically link the gitlab MR to a Jira Ticket
 1. Setup an issue on the Jira Board
