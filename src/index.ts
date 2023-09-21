@@ -1,5 +1,19 @@
+import dotenv from 'dotenv'
+
+dotenv.config()
+
 import express from 'express'
 import * as gitlabHandlers from './gitlab'
+
+import Jira from './jira/Jira'
+
+const test = async () => {
+  const results = await Jira.getTransitions('JAS-1')
+  console.log(JSON.stringify(results, null, 2))
+}
+
+test()
+
 
 const app = express()
 const port = 6000
@@ -20,6 +34,9 @@ app.post('/gitlab', async (req, res) => {
   switch(req.body?.event_name) {
     case 'push':
       await gitlabHandlers.pushHandler(req.body);
+      break;
+    case 'merge_request':
+      await gitlabHandlers.mergeHandler(req.body)
       break;
   }
 
