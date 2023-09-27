@@ -9,12 +9,6 @@ export enum TRANSITIONS {
 
 export default class Jira {
   public static async fetchIt<T>(verb: 'GET' | 'POST' | 'PUT' | 'PATCH' |'DELETE', path: string, body?: object) {
-    console.log({
-      verb,
-      path: `${process.env.JIRA_API_ENDPOINT}${path}`,
-      body,
-      token: `${process.env.JIRA_USERNAME}:${process.env.JIRA_TOKEN}`
-    })
     const response = await fetch(`${process.env.JIRA_API_ENDPOINT}${path}`, {
       method: verb,
       headers: {

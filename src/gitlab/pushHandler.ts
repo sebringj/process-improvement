@@ -7,11 +7,7 @@ export default async (ev: {
     title: string;
   }[]
 }) => {
-  /*
   const issues = Jira.extractJiraIssues(ev.commits[0].message + ' ' + ev.commits[0].title)
-  const issueDetails = await Promise.all(issues.map(issue => Jira.getIssue(issue))
-  await Promise.all(issueDetails.map(issue => {
-     if (issue)
-  }))
-  */
+  const issueDetails = await Promise.all(issues.map(issue => Jira.getIssue(issue)))
+  
 }

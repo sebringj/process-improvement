@@ -13,25 +13,27 @@ export default async (ev: {
     }
   }
 }) => {
+  const tickets = Jira.extractJiraIssues(ev.last_commit.title + ' ' + ev.last_commit.message)
+  let transitionTo: TRANSITIONS
   switch (ev.action) {
     case 'reopen':
     case 'open': { // dev completed, in review
-      const tickets = Jira.extractJiraIssues(ev.last_commit.title + ' ' + ev.last_commit.message)
-      await Promise.all(
-        tickets.map(jiraIssue => Jira.transitionIssue(jiraIssue, (TRANSITIONS.InReview)))
-      )
+      transitionTo = TRANSITIONS.InReview
       break;
     }
     case 'close':
       break;
     case 'merge': { // should run pipeline
-      const tickets = Jira.extractJiraIssues(ev.last_commit.title + ' ' + ev.last_commit.message)
-      await Promise.all(
-        tickets.map(jiraIssue => Jira.transitionIssue(jiraIssue, (TRANSITIONS.QAPending)))
-      )
+      transitionTo = TRANSITIONS.QAPending
       break;
     } case 'approved': break;
     case 'unapproval': break;
     case 'update': break;
+  }
+  // @ts-ignore
+  if (transitionTo) {
+    await Promise.all(
+      tickets.map(jiraIssue => Jira.transitionIssue(jiraIssue, (TRANSITIONS.InReview)))
+    )
   }
 }
